@@ -74,6 +74,7 @@ La version **TOM** met l’accent sur la construction dynamique d’un **tableau
 ## Arborescence du projet (fichiers fournis)
 
 Projet To Do List Javascript/
+
 ├── index.html        (ajout / modification des tâches)  
 ├── page2.html        (liste et gestion des tâches)  
 ├── script.js         (logique métier page 1)  
