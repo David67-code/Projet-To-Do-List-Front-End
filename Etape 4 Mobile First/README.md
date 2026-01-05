@@ -1,4 +1,4 @@
-# 📱 To-Do List — JavaScript Vanilla (Mobile First)
+# To-Do List — JavaScript Vanilla (Mobile First)
 
 Application de gestion de tâches **Mobile First**, développée en **JavaScript Vanilla**, avec persistance des données via **localStorage**.  
 L’interface est pensée pour un **usage mobile**, avec affichage des tâches sous forme de **cartes visuelles**, colorées selon la priorité.
