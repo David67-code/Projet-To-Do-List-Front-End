@@ -293,5 +293,5 @@ Utilisation libre à des fins d’apprentissage.
 
 ---
 
-© 2025 — **David POTEL**  
+© 2025 — David POTEL
 Projet pédagogique — Groupe 1
