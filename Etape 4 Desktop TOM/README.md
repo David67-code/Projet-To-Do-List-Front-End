@@ -22,7 +22,6 @@ Spécificité de cette version : affichage des tâches **sous forme de tableau H
   - Gestion des dates (Moment.js)
   - CSS & UI
 - Limites identifiées
-- Axes d’amélioration
 - Technologies
 - Licence
 
@@ -75,17 +74,12 @@ La version **TOM** met l’accent sur la construction dynamique d’un **tableau
 ## Arborescence du projet (fichiers fournis)
 
 Projet To Do List Javascript/
-│
-├── index.html
-├── page2.html
-│
-├── script.js
-├── script2.js
-│
-├── style.css
-├── style2.css
-│
-└── URL Etape4 Desktop TOM.url
+├── index.html        (ajout / modification des tâches)  
+├── page2.html        (liste et gestion des tâches)  
+├── script.js         (logique métier page 1)  
+├── script2.js        (affichage, tri, statut page 2)  
+├── style.css         (styles page formulaire)  
+└── style2.css        (styles page liste)
 
 ---
 
