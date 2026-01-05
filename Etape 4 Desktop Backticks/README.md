@@ -1,11 +1,46 @@
-# To-Do List — JavaScript Vanilla
+# To-Do List — JavaScript Vanilla (Backticks)
 
-LocalStorage · DOM · Template Literals (Backticks)
+**Application de gestion de tâches en JavaScript pur (Vanilla JS)**  
+Persistance via **localStorage** et génération dynamique de l’interface avec les **template literals (backticks)**.
 
-Projet de To-Do List développé en JavaScript pur (Vanilla JS), sans framework.
-L’objectif est de démontrer la maîtrise des fondamentaux front-end :
-manipulation du DOM, gestion d’état, persistance locale, validation de formulaire
-et génération dynamique de l’interface utilisateur.
+Ce projet est volontairement **sans framework** afin de se concentrer sur les **fondamentaux front-end** :
+DOM, logique métier, gestion d’état, validation de formulaire et affichage dynamique.
+
+---
+
+## Sommaire
+
+- Présentation
+- Objectifs pédagogiques
+- Fonctionnalités
+- Arborescence du projet
+- Détails techniques
+  - Modélisation des données
+  - Persistance (localStorage)
+  - Ajout et modification d’une tâche
+  - Génération dynamique avec les backticks
+  - Gestion des statuts et suppression
+  - Tri des tâches
+  - Gestion des dates (Moment.js)
+  - CSS & UI
+- Limites identifiées
+- Technologies utilisées
+- Conclusion
+- Licence
+
+---
+
+## Présentation
+
+Cette To-Do List est un **projet pédagogique** visant à reproduire le cycle de vie complet d’une tâche dans une application front-end :
+
+- création
+- affichage
+- modification
+- suppression
+- persistance
+
+La particularité de cette version repose sur l’utilisation des **template literals (`)** pour générer dynamiquement l’interface HTML, plutôt que sur une construction DOM élément par élément.
 
 ---
 
@@ -13,12 +48,39 @@ et génération dynamique de l’interface utilisateur.
 
 Ce projet permet de démontrer :
 
-- la structuration de données en JavaScript
-- l’utilisation du DOM sans librairie
-- la persistance via localStorage
-- l’utilisation des template literals (backticks)
-- la gestion d’un cycle de vie complet d’une tâche
-- l’identification des limites d’une application front-only
+- la **structuration des données** en JavaScript
+- la **manipulation du DOM sans librairie**
+- la **persistance locale** via localStorage
+- l’utilisation concrète des **template literals**
+- la gestion d’un **flux multi-pages sans backend**
+- l’identification des **limites d’une application front-only**
+
+---
+
+## Fonctionnalités
+
+### Page 1 — Ajout / Modification (`index.html`)
+
+- Formulaire unique pour l’ajout et la modification
+- Champs obligatoires avec validation visuelle
+- Contrôle des dates (échéance ≥ date de création)
+- Création d’un objet tâche structuré
+- Enregistrement dans `localStorage`
+- Mode modification :
+  - pré-remplissage du formulaire
+  - changement du bouton (“Ajouter” → “Sauvegarder”)
+  - mise à jour de la tâche existante
+
+---
+
+### Page 2 — Liste des tâches (`page2.html`)
+
+- Affichage dynamique des tâches
+- Génération HTML via **template literals**
+- Modification du statut en temps réel
+- Suppression logique des tâches
+- Tri par différents critères
+- Accès à la modification d’une tâche
 
 ---
 
@@ -34,152 +96,159 @@ to-do-list
 
 ---
 
-## Description des fichiers
+## Détails techniques
 
-### index.html
+### 1) Modélisation des données
 
-Page dédiée à l’ajout et à la modification d’une tâche.
-Le même formulaire est utilisé pour les deux actions afin d’éviter
-la duplication de logique.
+L’application repose sur une **modélisation simple mais structurée**, inspirée des bases de données relationnelles.
 
-Fonctionnalités :
+#### Données de référence
 
-- formulaire HTML complet
-- champs obligatoires
-- chargement de script.js
-- intégration de Moment.js pour la gestion des dates
+Les **priorités**, **étiquettes** et **statuts** sont définis sous forme de tableaux d’objets JavaScript.  
+Ces tableaux jouent le rôle de **tables de référence**.
 
----
+Ils permettent de :
 
-### page2.html
-
-Page dédiée à l’affichage des tâches.
-
-Fonctionnalités :
-
-- affichage dynamique des tâches
-- tri des tâches
-- modification du statut
-- accès à la modification d’une tâche
+- alimenter dynamiquement les champs `<select>`
+- associer des libellés lisibles aux identifiants
+- centraliser la logique métier
+- faciliter l’évolution de l’application
 
 ---
 
-## Modélisation des données
+#### Structure d’une tâche
 
-### Données de référence
+Chaque tâche est représentée par un **objet JavaScript** contenant :
 
-Les priorités, étiquettes et statuts sont modélisés sous forme de tableaux
-JavaScript. Ces tableaux jouent le rôle de tables de référence, similaires
-à une base de données relationnelle.
+- `idTache` : identifiant unique de la tâche
+- `titre` : titre de la tâche
+- `description` : description détaillée
+- `idPriorite` : référence vers une priorité
+- `idEtiquette` : référence vers une étiquette
+- `idStatut` : statut courant de la tâche
+- `dateCreation` : date de création (format ISO)
+- `dateEcheance` : date d’échéance (format ISO)
 
----
-
-### Structure d’une tâche
-
-Une tâche est représentée par un objet JavaScript contenant :
-
-- un identifiant
-- un titre
-- une description
-- une priorité
-- une étiquette
-- un statut
-- une date de création
-- une date d’échéance
-
-Les valeurs provenant des champs select sont des chaînes de caractères,
-ce qui nécessite une conversion lors des comparaisons et tris.
+Les valeurs provenant des champs `<select>` sont des **chaînes de caractères**.  
+Elles sont converties en nombres (`parseInt`) lors des comparaisons, tris et traitements logiques.
 
 ---
 
-## Persistance des données
+#### Rôle de cette modélisation
 
-Les données sont stockées dans le navigateur à l’aide de localStorage.
+Cette structure permet :
+
+- une séparation claire entre **données** et **interface**
+- une manipulation cohérente des tâches
+- une évolution naturelle vers :
+  - une API REST
+  - une base de données
+  - un framework front (React, Vue)
+
+---
+
+### 2) Persistance via LocalStorage
+
+Les données sont stockées côté navigateur grâce à **localStorage**.
 
 Clés utilisées :
 
-- dataTache : tableau principal des tâches
-- tacheTemporaire : tâche en cours de modification
+- `dataTache` : tableau principal des tâches
+- `tacheTemporaire` : tâche en cours de modification
 
-Les données sont converties en JSON lors du stockage et reconverties
-en objets JavaScript lors de la lecture.
+Les objets sont :
+
+- sérialisés avec `JSON.stringify()`
+- désérialisés avec `JSON.parse()`
 
 ---
 
-## Ajout et modification d’une tâche
+### 3) Ajout et modification d’une tâche
 
-Lorsqu’une tâche est ajoutée :
+#### Ajout
 
-1. les champs sont validés
-2. les dates sont contrôlées
-3. l’objet tâche est créé
-4. les données sont enregistrées dans localStorage
+1. Validation des champs
+2. Validation des dates
+3. Création de l’objet tâche
+4. Enregistrement dans `localStorage`
 
-Lorsqu’une tâche est modifiée :
+#### Modification
 
-- elle est stockée temporairement dans localStorage
+- la tâche est stockée temporairement
 - le formulaire est pré-rempli
 - le bouton change de comportement
-- la tâche est mise à jour puis réenregistrée
+- la tâche est mise à jour puis sauvegardée
 
-Ce mécanisme simule un flux multi-pages sans backend.
-
----
-
-## Génération dynamique de l’interface
-
-Les tâches sont affichées dynamiquement à l’aide des template literals
-(backticks). Cette approche permet :
-
-- une écriture HTML lisible
-- une interpolation directe des données
-- une compréhension claire du rendu dynamique
-
-Limite connue :
-l’utilisation de innerHTML peut poser des problèmes de sécurité dans
-un contexte réel, mais reste acceptable ici dans un cadre pédagogique.
+Ce mécanisme permet de simuler un **workflow multi-pages sans backend**.
 
 ---
 
-## Gestion du statut et du tri
+### 4) Génération dynamique avec les backticks
 
-Chaque tâche possède un statut modifiable dynamiquement.
-Si le statut devient « Supprimée », la tâche est retirée du tableau.
+L’affichage des tâches repose sur les **template literals** :
 
-Le tri des tâches peut se faire par :
+- génération HTML lisible
+- interpolation directe des données
+- rendu rapide et compréhensible
+
+Limite connue :  
+L’utilisation de `innerHTML` n’est pas sécurisée dans un contexte réel, mais reste acceptable ici **dans un cadre pédagogique**.
+
+---
+
+### 5) Gestion du statut et suppression
+
+Chaque tâche possède un statut modifiable :
+
+- changement dynamique via `<select>`
+- mise à jour des données dans `localStorage`
+- si le statut devient **“Supprimée”** :
+  - la tâche est retirée des données
+  - l’affichage est reconstruit
+
+---
+
+### 6) Tri des tâches
+
+Le tri est réalisé côté client avec `.sort()`.
+
+Critères disponibles :
 
 - priorité
 - date de création
 - date d’échéance
 - statut
 
-Après chaque tri, les données sont réenregistrées afin de conserver
-une cohérence entre affichage et stockage.
+Après chaque tri :
+
+- les données sont réenregistrées
+- l’affichage est reconstruit
 
 ---
 
-## Gestion des dates
+### 7) Gestion des dates (Moment.js)
 
 Moment.js est utilisé pour :
 
-- formater les dates pour l’affichage
-- garantir la compatibilité avec les champs date HTML
+- formater les dates affichées
+- garantir la compatibilité avec les champs `input[type="date"]`
 
-Ce choix est pédagogique.
+Ce choix est **pédagogique**.  
 Des alternatives modernes existent (date-fns, Luxon, Intl).
 
 ---
 
-## Styles et interface
+### 8) CSS & UI
 
-La page formulaire est conçue en mobile-first avec un layout simple
-et centré.
+- Page formulaire :
+  - layout simple et centré
+  - mobile-first
+  - hiérarchie visuelle claire
 
-La page liste utilise une grille CSS responsive permettant un affichage
-adapté à toutes les tailles d’écran.
-
-Les couleurs des cartes reflètent la priorité des tâches afin de renforcer
-la lisibilité visuelle.
+- Page liste :
+  - mise en page responsive
+  - lisibilité renforcée
+  - différenciation visuelle des priorités
 
 ---
 
@@ -188,16 +257,16 @@ la lisibilité visuelle.
 - génération des identifiants perfectible
 - dépendance au navigateur (localStorage)
 - absence de backend
-- logique et DOM partiellement couplés
+- couplage partiel logique / DOM
 
-Ces limites sont volontaires dans un cadre d’apprentissage.
+Ces limites sont **volontaires** dans un contexte d’apprentissage.
 
 ---
 
 ## Technologies utilisées
 
 - HTML5
-- CSS3 (Flexbox, Grid)
+- CSS3 (Flexbox / Grid)
 - JavaScript ES6
 - LocalStorage API
 - Moment.js
@@ -206,13 +275,23 @@ Ces limites sont volontaires dans un cadre d’apprentissage.
 
 ## Conclusion
 
-Ce projet démontre une compréhension solide des fondamentaux JavaScript :
-logique métier, DOM, persistance et structuration des données.
+Ce projet met en pratique  **des fondamentaux JavaScript** :
 
-Il constitue une base saine pour une évolution vers des architectures
-plus complexes et professionnelles.
+- logique métier
+- manipulation du DOM
+- persistance locale
+- génération dynamique de l’interface
+
+Il constitue une **base saine** pour une évolution vers des architectures plus professionnelles (backend, API, framework).
 
 ---
 
-© 2025 — David POTEL  
+## Licence
+
+Projet pédagogique / démonstration.  
+Utilisation libre à des fins d’apprentissage.
+
+---
+
+© 2025 — **David POTEL**  
 Projet pédagogique — Groupe 1
