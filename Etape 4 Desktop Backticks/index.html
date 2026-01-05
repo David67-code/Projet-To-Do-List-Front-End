@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List - Ajouter une tâche</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <header id="header">
+        <h1>To-Do List - Gestion des tâches</h1>
+    </header>
+
+    <main class="container">
+        <section>
+            <h2>Ajouter une tâche</h2>
+            <form id="tacheForm">
+                <label for="titre">Titre de la tâche :</label>
+                <input type="text" id="titre" name="titre" required>
+
+                <label for="description">Description :</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
+
+                <label for="idPriorite">Priorité :</label>
+                <select id="idPriorite" name="idPriorite" required>
+                    <option value="" disabled selected>Veuillez choisir</option>
+                </select>
+                <script>
+                    priorite.forEach(function (item, index) {
+                        let optionPriorite = `<option value="${item.idPriorite}" style="background-color: ${item.couleur};" title="${item.description}">${item.label}</option>`;
+                        document.getElementById("idPriorite").insertAdjacentHTML("beforeend", optionPriorite);
+                    });
+                </script>
+
+                <label for="idEtiquette">Étiquette :</label>
+                <select id="idEtiquette" name="idEtiquette" required>
+                    <option value="" disabled selected>Veuillez choisir</option>
+                </select>
+                <script>
+                    etiquette.forEach(function (item, index) {
+                        let optionEtiquette = `<option value="${item.idEtiquette}" title="${item.description}">${item.label}</option>`;
+                        document.getElementById("idEtiquette").insertAdjacentHTML("beforeend", optionEtiquette);
+                    });
+                </script>
+
+                <label for="dateCreation">Date de création :</label>
+                <input type="date" id="dateCreation" name="dateCreation" required>
+
+                <label for="dateEcheance">Date d'échéance :</label>
+                <input type="date" id="dateEcheance" name="dateEcheance" required>
+
+                <button type="button" onclick="ajouterTache()">Ajouter une tâche</button>
+                <button type="button" onclick="window.location.href='page2.html'">Consulter la liste des tâches</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 - Projet To-Do List David POTEL Groupe 1</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            const today = moment().format("YYYY-MM-DD");
+            document.getElementById("dateCreation").setAttribute("min", today);
+            document.getElementById("dateEcheance").setAttribute("min", today);
+        });
+    </script>
+</body>
+
+</html>
