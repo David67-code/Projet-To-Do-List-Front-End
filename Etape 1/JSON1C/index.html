@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet Etape 1C</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        h2 {
+            text-decoration: underline;
+        }
+
+        h1,
+        h2 {
+            color: #007bff;
+        }
+
+        hr {
+            border: 1px solid #007bff;
+            width: 80%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>AUTRES PARAMETRES POUR UNE TACHE ETAPE 1C</h1>
+    <p>Si l'on reprend les données JSON de l'étape 1A, on peut retenir deux critères et écrire un jeu de valeur pour
+        chacun d'eux :</p>
+    <ul>
+        <li>Le critère "etiquette" avec les valeurs Perso ou Pro</li>
+        <li>Le critère "statut" avec les valeurs A faire, En cours, Terminée ou Supprimée</li>
+    </ul>
+
+    <h2>Ecriture du jeu de valeur du critère "etiquette"</h2>
+    <p>Un label et une description ont été ajoutés à ce jeu de valeur.</p>
+    <h3><i>Structure JSON déployée</i></h3>
+    <pre>
+        {
+        "etiquette": [
+            {
+            "idEtiquette": 1,
+            "label": "Perso",
+            "description": "Tâches personnelles, liées à la vie quotidienne ou aux loisirs."
+            },
+            {
+            "idEtiquette": 2,
+            "label": "Pro",
+            "description": "Tâches professionnelles, liées au travail ou aux projets."
+            }
+            ]
+        }
+    </pre>
+    <hr>
+    <h3><i>Structure JSON compactée</i></h3>
+    <pre>
+        {"etiquette":[{"idEtiquette":1,"label":"Perso","description":"Tâches personnelles, liées à la vie quotidienne ou
+        aux loisirs."},{"idEtiquette":2,"label":"Pro","description":"Tâches professionnelles, liées au travail ou aux
+        projets."}]}
+    </pre>
+
+    <h2>Ecriture du jeu de valeur du critère "statut"</h2>
+    <p>Un label et une description ont été ajoutés à ce jeu de valeur.</p>
+    <h3><i>Structure JSON déployée</i></h3>
+    <pre>
+    {
+    "statut": [
+        {
+        "idStatut": 1,
+        "label": "A faire",
+        "description": "Tâche à réaliser, pas encore commencée."
+        },
+        {
+        "idStatut": 2,
+        "label": "En cours",
+        "description": "Tâche actuellement en cours de réalisation."
+        },
+        {
+        "idStatut": 3,
+        "label": "Terminée",
+        "description": "Tâche achevée avec succès."
+        },
+        {
+        "idStatut": 4,
+        "label": "Supprimée",
+        "description": "Tâche annulée ou non nécessaire."
+        }
+        ]
+    }
+    </pre>
+    <hr>
+    <h3><i>Structure JSON compactée</i></h3>
+    <pre>
+    {"statut":[{"idStatut":1,"label":"A faire","description":"Tâche à réaliser, pas encore
+    commencée."},{"idStatut":2,"label":"En cours","description":"Tâche actuellement en cours de
+    réalisation."},{"idStatut":3,"label":"Terminée","description":"Tâche achevée avec
+    succès."},{"idStatut":4,"label":"Supprimée","description":"Tâche annulée ou non nécessaire."}]}
+    </pre>
+</body>
+
+</html>

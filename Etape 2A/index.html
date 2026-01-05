@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List - Ajouter une tâche</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: min(100%, 400px);
+            margin: auto;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        h2 {
+            padding-left: 8px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, #0056b3, #6ba8f7);
+            color: white;
+            text-align: center;
+            width: 100%;
+            border-radius: 10px 10px 0px 0px;
+        }
+
+        .container {
+            background: #cde2fc;
+            padding: 15px 0px;
+            width: 100%;
+            flex-grow: 1;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            padding: 0px 16px;
+        }
+
+        label {
+            margin-top: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        input,
+        textarea,
+        select,
+        button {
+            margin-top: 4px;
+            padding: 6px;
+            font-size: 0.9rem;
+            border: 2px solid #cccccc;
+            border-radius: 5px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            background: linear-gradient(to top, #ff6666, #cc0000);
+            color: white;
+            cursor: pointer;
+            border: none;
+            margin-top: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 10px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            background: linear-gradient(to bottom, #6ba8f7, #0056b3);
+            color: white;
+            text-align: center;
+            padding: 5px 0;
+            width: 100%;
+            font-size: 0.8rem;
+            border-radius: 0px 0px 10px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>To-Do List - Gestion des tâches</h1>
+    </header>
+
+    <main class="container">
+        <section>
+            <h2>Ajouter une tâche</h2>
+            <form>
+                <label for="title">Titre de la tâche :</label>
+                <input type="text" id="title" name="title" required>
+
+                <label for="description">Description :</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
+
+                <label for="priority">Priorité :</label>
+                <select id="priority" name="priority" required>
+                    <option value="" disabled selected>Veuillez choisir</option>
+                    <option value="1">Très urgent</option>
+                    <option value="2">Urgent</option>
+                    <option value="3">Moyenne</option>
+                    <option value="4">Basse</option>
+                    <option value="5">Optionnelle</option>
+                </select>
+
+                <label for="label">Étiquette :</label>
+                <select id="label" name="label" required>
+                    <option value="" disabled selected>Veuillez choisir</option>
+                    <option value="1">Perso</option>
+                    <option value="2">Pro</option>
+                </select>
+
+                <label for="status">Statut :</label>
+                <select id="status" name="status" required>
+                    <option value="" disabled selected>Veuillez choisir</option>
+                    <option value="1">À faire</option>
+                    <option value="2">En cours</option>
+                    <option value="3">Terminée</option>
+                    <option value="4">Supprimée</option>
+                </select>
+
+                <label for="creation-date">Date de création :</label>
+                <input type="date" id="creation-date" name="creation-date" required>
+
+                <label for="due-date">Date d'échéance :</label>
+                <input type="date" id="due-date" name="due-date" required>
+
+                <button type="submit">Ajouter</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 - Projet To-Do List David POTEL Groupe 1</p>
+    </footer>
+
+</body>
+
+</html>

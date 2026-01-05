@@ -1,0 +1,32 @@
+[
+  {
+    "idPriorite": 1,
+    "label": "Très urgent",
+    "description": "Tâche critique nécessitant une action immédiate.",
+    "couleur": "#ff0000"
+  },
+  {
+    "idPriorite": 2,
+    "label": "Urgent",
+    "description": "Tâche importante à réaliser rapidement.",
+    "couleur": "#ff8000"
+  },
+  {
+    "idPriorite": 3,
+    "label": "Moyenne",
+    "description": "Tâche à faire, mais sans contrainte immédiate.",
+    "couleur": "#ffff00"
+  },
+  {
+    "idPriorite": 4,
+    "label": "Basse",
+    "description": "Tâche à effectuer quand on a le temps.",
+    "couleur": "#80ff00"
+  },
+  {
+    "idPriorite": 5,
+    "label": "Optionnelle",
+    "description": "Tâche non prioritaire, qui peut être reportée indéfiniment.",
+    "couleur": "#0080ff"
+  }
+]

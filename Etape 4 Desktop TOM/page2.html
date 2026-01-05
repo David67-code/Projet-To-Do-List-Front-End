@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List - Liste des Tâches</title>
+    <link rel="stylesheet" href="style2.css"> <!-- Ce fichier contient les styles pour la version desktop -->
+    <script src="script2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script>
+        window.addEventListener("DOMContentLoaded", function () {
+            afficherTaches();
+        });
+    </script>
+</head>
+
+<body>
+    <header id="header">
+        <h1>To-Do List - Liste des tâches</h1>
+    </header>
+
+    <main class="container">
+        <div class="button-container">
+            <button class="button ajouter" type="button" onclick="window.location.href='index.html'">Cliquer pour
+                ajouter une
+                tâche</button>
+        </div>
+        <div>
+            <label class="tri" for="tri">Trier par :</label>
+            <select id="tri" name="tri" onchange="trierTaches()">
+                <option value="priorite">Priorité</option>
+                <option value="dateCreation">Date de création</option>
+                <option value="dateEcheance">Date d'échéance</option>
+                <option value="statut">Statut</option>
+            </select>
+            <div>
+                <div id="listeTaches"></div>
+            </div>
+            <div class="button-container">
+                <button class="button" type="button" onclick="window.location.href='index.html'">Cliquer pour ajouter
+                    une tâche</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 - Projet To-Do List David POTEL Groupe 1</p>
+    </footer>
+</body>
+
+</html>

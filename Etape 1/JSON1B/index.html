@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet Etape 1B</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        h2 {
+            text-decoration: underline;
+        }
+
+        h1,
+        h2 {
+            color: #007bff;
+        }
+
+        hr {
+            border: 1px solid #007bff;
+            width: 80%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>STRUCTURE JSON DE LA PRIORITE ETAPE 1B</h1>
+    <h2>Structure JSON déployée</h2>
+    <pre>
+        {
+        "priorite": [
+            {
+            "idPriorite": 1,
+            "label": "Très urgent",
+            "description": "Tâche critique nécessitant une action immédiate.",
+            "couleur": "#ff0000"
+            },
+            {
+            "idPriorite": 2,
+            "label": "Urgent",
+            "description": "Tâche importante à réaliser rapidement.",
+            "couleur": "#ff8000"
+             },
+            {
+            "idPriorite": 3,
+            "label": "Moyenne",
+            "description": "Tâche à faire, mais sans contrainte immédiate.",
+            "couleur": "#ffff00"
+            },
+            {
+            "idPriorite": 4,
+            "label": "Basse",
+            "description": "Tâche à effectuer quand on a le temps.",
+            "couleur": "#80ff00"
+            },
+            {
+            "idPriorite": 5,
+            "label": "Optionnelle",
+            "description": "Tâche non prioritaire, qui peut être reportée indéfiniment.",
+            "couleur": "#0080ff"
+            }
+            ]
+        }
+    </pre>
+    <hr>
+    <h2>Structure JSON compactée</h2>
+    <pre>
+        {"priorite":[{"idPriorite":1,"label":"Très urgent","description":"Tâche critique nécessitant une action
+        immédiate.","couleur":"#ff0000"},{"idPriorite":2,"label":"Urgent","description":"Tâche importante à réaliser
+        rapidement.","couleur":"#ff8000"},{"idPriorite":3,"label":"Moyenne","description":"Tâche à faire, mais sans
+        contrainte immédiate.","couleur":"#ffff00"},{"idPriorite":4,"label":"Basse","description":"Tâche à effectuer quand
+        on a le temps.","couleur":"#80ff00"},{"idPriorite":5,"label":"Optionnelle","description":"Tâche non prioritaire, qui
+        peut être reportée indéfiniment.","couleur":"#0080ff"}]}
+    </pre>
+</body>
+
+</html>

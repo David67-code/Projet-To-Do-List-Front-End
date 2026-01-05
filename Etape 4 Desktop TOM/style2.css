@@ -1,0 +1,162 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: min(80%, 1200px);
+  min-height: 100vh;
+  background-color: #f4f4f4;
+}
+
+h1 {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+h2 {
+  padding-left: 2%;
+}
+
+header {
+  background: linear-gradient(to bottom, #0056b3, #6ba8f7);
+  color: white;
+  text-align: center;
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+}
+
+.container {
+  background: #cde2fc;
+  padding: 3% 0;
+  width: 100%;
+  flex-grow: 1;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 0 5%;
+}
+
+label {
+  margin-top: 1%;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+input,
+textarea,
+select,
+button {
+  margin-top: 2%;
+  margin-bottom: 1%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 2px solid #cccccc;
+  border-radius: 5px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.tri {
+  font-weight: bold;
+  font-size: 1rem;
+  padding-left: 4%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+}
+
+button {
+  background: linear-gradient(to top, #ff6666, #cc0000);
+  color: white;
+  cursor: pointer;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 0.75rem;
+  transition: 0.3s;
+  width: auto;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.ajouter {
+  margin-top: 0px;
+}
+
+footer {
+  background: linear-gradient(to bottom, #6ba8f7, #0056b3);
+  color: white;
+  text-align: center;
+  padding: 0.5rem 0;
+  width: 100%;
+  font-size: 1rem;
+  border-radius: 0 0 10px 10px;
+}
+
+/* Règles pour le tableau des tâches */
+
+#listeTaches {
+  padding: 20px;
+  overflow-x: auto;
+  width: auto;
+}
+
+#listeTaches table {
+  background-color: white;
+  border-radius: 10px;
+  border-collapse: separate; 
+  border-spacing: 4px; /* espacement entre les cellules */
+}
+
+#listeTaches th,
+#listeTaches td {
+  padding: 12px 16px;
+  text-align: left;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+  white-space: nowrap;
+  width: auto;
+}
+
+#listeTaches th {
+  font-weight: bold;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  text-align: center;
+}
+
+#listeTaches tr:hover td{
+  background-color: #eef6ff;
+}
+
+#listeTaches select {
+  max-width: 150px;
+}
+
+#listeTaches .btn-modifier {
+  font-size: 0.9rem;
+  padding: 6px 12px;
+  background: linear-gradient(to top, #ff6666, #cc0000);
+  color: white;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}

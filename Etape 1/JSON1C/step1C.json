@@ -1,0 +1,36 @@
+{
+  "etiquette": [
+    {
+      "idEtiquette": 1,
+      "label": "Perso",
+      "description": "Tâches personnelles, liées à la vie quotidienne ou aux loisirs."
+    },
+    {
+      "idEtiquette": 2,
+      "label": "Pro",
+      "description": "Tâches professionnelles, liées au travail ou aux projets."
+    }
+  ],
+  "statut": [
+    {
+      "idStatut": 1,
+      "label": "A faire",
+      "description": "Tâche à réaliser, pas encore commencée."
+    },
+    {
+      "idStatut": 2,
+      "label": "En cours",
+      "description": "Tâche actuellement en cours de réalisation."
+    },
+    {
+      "idStatut": 3,
+      "label": "Terminée",
+      "description": "Tâche achevée avec succès."
+    },
+    {
+      "idStatut": 4,
+      "label": "Supprimée",
+      "description": "Tâche annulée ou non nécessaire."
+    }
+  ]
+}

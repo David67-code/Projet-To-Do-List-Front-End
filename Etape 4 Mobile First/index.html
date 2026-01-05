@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List - Ajouter une tâche</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: min(100%, 400px);
+            margin: auto;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        h2 {
+            padding-left: 8px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, #0056b3, #6ba8f7);
+            color: white;
+            text-align: center;
+            width: 100%;
+            border-radius: 10px 10px 0px 0px;
+        }
+
+        .container {
+            background: #cde2fc;
+            padding: 15px 0px;
+            width: 100%;
+            flex-grow: 1;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            padding: 0px 16px;
+        }
+
+        label {
+            margin-top: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        input,
+        textarea,
+        select,
+        button {
+            margin-top: 4px;
+            padding: 6px;
+            font-size: 0.9rem;
+            border: 2px solid #cccccc;
+            border-radius: 5px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .tri {
+            margin-top: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            padding-left: 16px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        button {
+            background: linear-gradient(to top, #ff6666, #cc0000);
+            color: white;
+            cursor: pointer;
+            border: none;
+            margin-top: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 10px;
+            transition: 0.3s;
+            width: auto;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            background: linear-gradient(to bottom, #6ba8f7, #0056b3);
+            color: white;
+            text-align: center;
+            padding: 5px 0;
+            width: 100%;
+            font-size: 0.8rem;
+            border-radius: 0px 0px 10px 10px;
+        }
+    </style>
+
+    <script>
+        let priorite = [
+            {
+                "idPriorite": 1,
+                "label": "Très urgent",
+                "description": "Tâche critique nécessitant une action immédiate.",
+                "couleur": "#ff0000"
+            },
+            {
+                "idPriorite": 2,
+                "label": "Urgent",
+                "description": "Tâche importante à réaliser rapidement.",
+                "couleur": "#ff8000"
+            },
+            {
+                "idPriorite": 3,
+                "label": "Moyenne",
+                "description": "Tâche à faire, mais sans contrainte immédiate.",
+                "couleur": "#ffff00"
+            },
+            {
+                "idPriorite": 4,
+                "label": "Basse",
+                "description": "Tâche à effectuer quand on a le temps.",
+                "couleur": "#80ff00"
+            },
+            {
+                "idPriorite": 5,
+                "label": "Optionnelle",
+                "description": "Tâche non prioritaire, qui peut être reportée indéfiniment.",
+                "couleur": "#0080ff"
+            }
+        ]
+
+        let etiquette = [
+            {
+                "idEtiquette": 1,
+                "label": "Perso",
+                "description": "Tâches personnelles, liées à la vie quotidienne ou aux loisirs."
+            },
+            {
+                "idEtiquette": 2,
+                "label": "Pro",
+                "description": "Tâches professionnelles, liées au travail ou aux projets."
+            }
+        ]
+
+        let statut = [
+            {
+                "idStatut": 1,
+                "label": "A faire",
+                "description": "Tâche à réaliser, pas encore commencée."
+            },
+            {
+                "idStatut": 2,
+                "label": "En cours",
+                "description": "Tâche actuellement en cours de réalisation."
+            },
+            {
+                "idStatut": 3,
+                "label": "Terminée",
+                "description": "Tâche achevée avec succès."
+            },
+            {
+                "idStatut": 4,
+                "label": "Supprimée",
+                "description": "Tâche annulée ou non nécessaire."
+            }
+        ]
+
+        let tache = []; // Création du tableau des tâches
+
+        function ajouterTache() {
+            let dataStringTache = localStorage.getItem("dataTache"); // Récupération des données du local storage à partir de la clé "dataTache"
+            if (dataStringTache != null) {
+                tache = JSON.parse(dataStringTache); // Si les données existent, on les parse pour les convertir en tableau JavaScript
+            }
+
+            // Récupération des valeurs des champs du formulaire
+            let titreTache = document.getElementById("titre").value;
+            let descriptionTache = document.getElementById("description").value;
+            let prioriteTache = document.getElementById("idPriorite").value;
+            let etiquetteTache = document.getElementById("idEtiquette").value;
+            let statutTache = 1; // "A faire" par défaut lors de l'affichage d'une tâche
+            let dateCreationTache = document.getElementById("dateCreation").value;
+            let dateEcheanceTache = document.getElementById("dateEcheance").value;
+
+            // Vérification des champs obligatoires
+            let champsObligatoires = [
+                { id: "titre", nom: "Titre" },
+                { id: "description", nom: "Description" },
+                { id: "idPriorite", nom: "Priorité" },
+                { id: "idEtiquette", nom: "Étiquette" },
+                { id: "dateCreation", nom: "Date de création" },
+                { id: "dateEcheance", nom: "Date d'échéance" }
+            ];
+
+            let formulaireValide = true;
+            let messageErreur = "Veuillez remplir les champs suivants :\n";
+
+            champsObligatoires.forEach(champ => { // Boucle pour vérifier les champs obligatoires
+                let element = document.getElementById(champ.id); // Récupération de l'élément HTML correspondant au champ
+                if (!element.value.trim()) { // Si le champ est vide
+                    formulaireValide = false; // Le formulaire n'est pas valide
+                    messageErreur += `- ${champ.nom}\n`; // Ajout du message d'erreur
+                    element.style.border = "2px solid red"; // Ajout d'une bordure rouge pour indiquer l'erreur
+                } else {
+                    element.style.border = ""; // Suppression de la bordure rouge si le champ est rempli
+                }
+            });
+
+            if (!formulaireValide) { // Si le formulaire n'est pas valide
+                alert(messageErreur); // Affichage du message d'erreur
+                return;
+            }
+
+            // Récupérer l'élément du champ date échéance
+            let champDateEcheance = document.getElementById("dateEcheance");
+
+            try {
+                // Comparaison des dates
+                let creation = new Date(dateCreationTache);
+                let echeance = new Date(dateEcheanceTache);
+
+                // On ignore les heures pour la comparaison
+                creation.setHours(0, 0, 0, 0);
+                echeance.setHours(0, 0, 0, 0);
+
+                if (echeance < creation) {
+                    // Ajouter une bordure rouge
+                    champDateEcheance.style.border = "2px solid red";
+                    throw new Error("La date d'échéance ne peut pas être antérieure à la date de création.");
+                }
+
+                // Si tout est OK, retirer le style d'erreur
+                champDateEcheance.style.border = "";
+
+                // Si tout est OK, création de la tâche
+                let newIdTache = tache.length + 1;  // Génération d'un ID unique pour la nouvelle tâche
+                let newTache = { "idTache": newIdTache, "titre": titreTache, "description": descriptionTache, "idPriorite": prioriteTache, "idEtiquette": etiquetteTache, "idStatut": statutTache, "dateCreation": dateCreationTache, "dateEcheance": dateEcheanceTache };
+
+                tache.push(newTache); // On ajoute la nouvelle tâche dans le tableau des tâches
+
+                let tacheString = JSON.stringify(tache); // On convertit le tableau des tâches en chaîne de caractères JSON
+                localStorage.setItem("dataTache", tacheString); // Stockage des données dans le localStorage avec la clé "dataTache"
+                document.getElementById("tacheForm").reset(); // Remise à zéro du formulaire de saisie de tâche
+
+                afficherTaches(); // Appel de la fonction d'affichage des tâches
+
+            } catch (error) {
+                alert(error.message);
+                return; // On arrête l'exécution si la date est incorrecte
+            }
+        }
+
+        function afficherTaches() {
+            let dataStringTache = localStorage.getItem("dataTache"); // Récupération des données du local storage à partir de la clé "dataTache"
+            let listeTaches = document.getElementById("listeTaches"); // Récupération de l'élément HTML qui contiendra la liste des tâches
+            listeTaches.innerHTML = ""; // Effacement du contenu de la liste des tâches avant de réécrire cette liste
+
+            if (!dataStringTache) return; // Si le tableau des tâches est vide, on arrête la fonction
+
+            let taches = JSON.parse(dataStringTache); // On parse les données du local storage pour les convertir en tableau JavaScript
+
+            taches.forEach((tache, index) => {
+                let couleur = priorite.find(p => p.idPriorite == tache.idPriorite).couleur; // Récupération de la couleur associée à la priorité de la tâche
+                let etiquetteLabel = etiquette.find(e => e.idEtiquette == tache.idEtiquette).label; // Récupération du label associé à l'étiquette de la tâche
+                let dateCreation = moment(tache.dateCreation).format("DD/MM/YYYY"); // Formatage de la date de création en "DD/MM/YYYY"
+                let dateEcheance = moment(tache.dateEcheance).format("DD/MM/YYYY"); // Formatage de la date d'échéance en "DD/MM/YYYY"
+
+                let div = document.createElement("div"); // Création d'un élément div pour contenir les informations de la tâche
+                div.style = `
+                    border: 5px solid ${couleur};
+                    background: linear-gradient(to bottom, ${couleur}30, transparent);
+                    margin: 8px;
+                    padding: 8px;
+                    border-radius: 5px;
+                `; // Style de la div pour la faire ressembler à une carte de tâche
+
+
+                // Génération des options pour le select de statut de la tâche
+                let optionsStatut = statut.map(s =>
+                    // Pour chaque élément 's' dans le tableau 'statut', on crée une chaîne HTML qui représente une option.
+                    `<option value="${s.idStatut}"${s.idStatut == tache.idStatut ? 'selected' : ''}>${s.label}</option>`
+                    // Ici, on vérifie si 'idStatut' de l'élément 's' est égal à 'idStatut' de la tâche actuelle 'tache'.
+                    // Si c'est le cas, on ajoute l'attribut 'selected' à l'option, sinon on n'ajoute rien.
+                ).join("");
+                // La méthode 'join("")' permet de combiner tous les éléments du tableau résultant en une seule chaîne de caractères, sans séparateur.
+
+
+                div.innerHTML = `
+                    <div style="text-align: center; font-weight: bold; font-size: 1.2rem; color: ${couleur}; margin-bottom: 10px;">
+                    Priorité : ${priorite.find(p => p.idPriorite == tache.idPriorite).label}</div><br>
+                    <strong>${tache.titre}</strong><br><br>
+                    <div style="white-space: normal; word-wrap: break-word; max-width: 100%; text-align: justify;">${tache.description}</div><br>
+                    <strong>Étiquette :</strong> ${etiquetteLabel}<br><br>
+                    <strong>Date de création : </strong>${dateCreation}<br>
+                    <strong>Date d'échéance : </strong>${dateEcheance}<br><br>
+                    <label for="statutSelect${tache.idTache}">Statut :</label>
+                    <select id="statutSelect${tache.idTache}" style="border: 2px solid #6ba8f7; border-radius: 5px; padding: 4px;">${optionsStatut}</select>
+                    <div class="button-container"> 
+                        <button onclick="modifierTache(${tache.idTache})">Modifier</button>
+                    </div>
+                `; // Contenu de la div avec les informations de la tâche
+
+                // Événement de changement de statut
+                div.querySelector(`#statutSelect${tache.idTache}`).addEventListener("change", function (e) { // On écoute le changement de statut
+                    let nouveauStatut = e.target.value; // Récupération du nouveau statut sélectionné
+                    taches[index].idStatut = nouveauStatut; // Mise à jour de l'objet tache avec le nouveau statut
+
+                    if (nouveauStatut == 4) {
+                        taches.splice(index, 1); // Suppression de la tâche si le statut est "Terminée"
+                    }
+
+                    localStorage.setItem("dataTache", JSON.stringify(taches)); // Mise à jour des données du local storage
+                    afficherTaches();
+                });
+
+                listeTaches.appendChild(div); // Ajout de la div contenant les informations de la tâche au conteneur
+            });
+        }
+
+        function trierTaches() {
+            let critereTri = document.getElementById("tri").value; // Récupération du critère de tri sélectionné
+            let dataStringTache = localStorage.getItem("dataTache"); // Récupération des données à partir du localstorage
+
+            if (dataStringTache != null) {
+                let taches = JSON.parse(dataStringTache);
+
+                // Tri des tâches selon le critère choisi
+                switch (critereTri) { // Utilisation de .sort() pour trier le tableau taches
+                    case "priorite":
+                        taches.sort((a, b) => a.idPriorite - b.idPriorite); // tri par idPriorité du plus petit au plus grand
+                        break;
+                    case "dateCreation":
+                        taches.sort((a, b) => new Date(a.dateCreation) - new Date(b.dateCreation)); // Si le résultat est négatif → a vient avant b
+                        break;
+                    case "dateEcheance":
+                        taches.sort((a, b) => new Date(a.dateEcheance) - new Date(b.dateEcheance)); // Si le résultat est positif → a vient après b
+                        break;
+                    case "statut":
+                        taches.sort((a, b) => a.idStatut - b.idStatut); // Si le résultat est zéro → a et b sont considérés comme équivalents
+                        break;
+                }
+
+                // Sauvegarder les données triées dans le localStorage
+                localStorage.setItem("dataTache", JSON.stringify(taches));
+
+                afficherTaches(); // Réafficher les tâches triées
+            }
+        }
+
+        function modifierTache(idTache) {
+            // Récupérer la tâche spécifique depuis le localStorage
+            let dataStringTache = localStorage.getItem("dataTache");
+            let taches = JSON.parse(dataStringTache);
+
+            // Trouver la tâche en utilisant l'idTache
+            let tacheAModifier = taches.find(t => t.idTache === idTache);
+
+            // Si la tâche est trouvée, on la préremplit dans le formulaire
+            if (tacheAModifier) {
+                // Remplir le formulaire avec les informations de la tâche
+                document.getElementById("titre").value = tacheAModifier.titre;
+                document.getElementById("description").value = tacheAModifier.description;
+                document.getElementById("idPriorite").value = tacheAModifier.idPriorite;
+                document.getElementById("idEtiquette").value = tacheAModifier.idEtiquette;
+                document.getElementById("dateCreation").value = tacheAModifier.dateCreation;
+                document.getElementById("dateEcheance").value = tacheAModifier.dateEcheance;
+
+                // Faire défiler la page jusqu'au formulaire
+                document.getElementById("header").scrollIntoView({
+                    behavior: 'smooth', // Défilement en douceur
+                    block: 'start'      // Positionner le formulaire en haut de la page
+                });
+
+                // Remplacer le bouton "Ajouter" par un bouton "Sauvegarder"
+                let boutonForm = document.querySelector("button[type='button']");
+                boutonForm.textContent = "Sauvegarder";
+                boutonForm.setAttribute("onclick", `sauvegarderModification(${idTache})`);
+            }
+        }
+
+        function sauvegarderModification(idTache) {
+            let dataStringTache = localStorage.getItem("dataTache");
+            let taches = JSON.parse(dataStringTache);
+
+            // Trouver la tâche à modifier
+            let tacheAModifier = taches.find(t => t.idTache === idTache);
+
+            // Récupérer les nouvelles valeurs du formulaire
+            let titreTache = document.getElementById("titre").value;
+            let descriptionTache = document.getElementById("description").value;
+            let prioriteTache = document.getElementById("idPriorite").value;
+            let etiquetteTache = document.getElementById("idEtiquette").value;
+            let dateCreationTache = document.getElementById("dateCreation").value;
+            let dateEcheanceTache = document.getElementById("dateEcheance").value;
+
+            // Vérification des champs obligatoires
+            let champsObligatoires = [
+                { id: "titre", nom: "Titre" },
+                { id: "description", nom: "Description" },
+                { id: "idPriorite", nom: "Priorité" },
+                { id: "idEtiquette", nom: "Étiquette" },
+                { id: "dateCreation", nom: "Date de création" },
+                { id: "dateEcheance", nom: "Date d'échéance" }
+            ];
+
+            let formulaireValide = true;
+            let messageErreur = "Veuillez remplir les champs suivants :\n";
+
+            champsObligatoires.forEach(champ => {
+                let element = document.getElementById(champ.id); // Récupérer l'élément HTML
+                if (!element.value.trim()) { // Vérifier si le champ est invalide
+                    formulaireValide = false;
+                    messageErreur += `- ${champ.nom}\n`;
+                    element.style.border = "2px solid red"; // Ajouter une bordure rouge pour indiquer l'erreur
+                } else {
+                    element.style.border = ""; // Supprimer la bordure rouge
+                }
+            });
+
+            if (!formulaireValide) { // Si le formulaire n'est pas valide 
+                alert(messageErreur); // Afficher un message d'erreur
+                return;
+            }
+
+            // Récupérer l'élément du champ date échéance
+            let champDateEcheance = document.getElementById("dateEcheance");
+
+            try {
+                let creation = new Date(dateCreationTache);
+                let echeance = new Date(dateEcheanceTache);
+
+                // On ignore l'heure pour la comparaison
+                creation.setHours(0, 0, 0, 0);
+                echeance.setHours(0, 0, 0, 0);
+
+                if (echeance < creation) {
+                    // Ajouter une bordure rouge
+                    champDateEcheance.style.border = "2px solid red";
+                    throw new Error("La date d'échéance ne peut pas être antérieure à la date de création.");
+                }
+
+                // Si tout est OK, retirer le style d'erreur
+                champDateEcheance.style.border = "";
+
+                // Si les dates sont valides, mettre à jour la tâche dans le tableau des tâches
+                tacheAModifier.titre = titreTache;
+                tacheAModifier.description = descriptionTache;
+                tacheAModifier.idPriorite = prioriteTache;
+                tacheAModifier.idEtiquette = etiquetteTache;
+                tacheAModifier.dateCreation = dateCreationTache;
+                tacheAModifier.dateEcheance = dateEcheanceTache;
+
+                // Sauvegarder les tâches mises à jour dans le localStorage
+                localStorage.setItem("dataTache", JSON.stringify(taches));
+
+                // Réinitialiser le formulaire
+                document.getElementById("tacheForm").reset();
+
+                // Réinitialiser le bouton
+                let boutonForm = document.querySelector("button[type='button']");
+                boutonForm.textContent = "Ajouter";
+                boutonForm.setAttribute("onclick", "ajouterTache()");
+
+                // Réafficher les tâches mises à jour
+                afficherTaches();
+
+            } catch (error) {
+                alert(error.message);
+                return; // Empêche la suite de la fonction si erreur
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <header id="header">
+        <h1>To-Do List - Gestion des tâches</h1>
+    </header>
+
+    <main class="container">
+        <section>
+            <h2>Ajouter une tâche</h2>
+            <form id="tacheForm">
+                <label for="titre">Titre de la tâche :</label>
+                <input type="text" id="titre" name="titre" required>
+
+                <label for="description">Description :</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
+
+                <label for="idPriorite">Priorité :</label>
+                <select id="idPriorite" name="idPriorite" required>
+                    <option value="" disabled selected>Veuillez choisir</option>
+                </select>
+                <script>
+                    priorite.forEach(function (item, index) {
+                        let optionPriorite = `<option value="${item.idPriorite}" style="background-color: ${item.couleur};" title="${item.description}">${item.label}</option>`;
+                        document.getElementById("idPriorite").insertAdjacentHTML("beforeend", optionPriorite);
+                    });
+                </script>
+
+                <label for="idEtiquette">Étiquette :</label>
+                <select id="idEtiquette" name="idEtiquette" required>
+                    <option value="" disabled selected>Veuillez choisir</option>
+                </select>
+                <script>
+                    etiquette.forEach(function (item, index) {
+                        let optionEtiquette = `<option value="${item.idEtiquette}" title="${item.description}">${item.label}</option>`;
+                        document.getElementById("idEtiquette").insertAdjacentHTML("beforeend", optionEtiquette);
+                    });
+                </script>
+
+                <label for="dateCreation">Date de création :</label>
+                <input type="date" id="dateCreation" name="dateCreation" required>
+
+                <label for="dateEcheance">Date d'échéance :</label>
+                <input type="date" id="dateEcheance" name="dateEcheance" required>
+
+                <button type="button" onclick="ajouterTache()">Ajouter</button>
+            </form>
+        </section>
+        <section>
+            <h2>Liste des tâches</h2>
+            <label class="tri" for="tri">Trier par :</label>
+            <select id="tri" name="tri" onchange="trierTaches()">
+                <option value="priorite">Priorité</option>
+                <option value="dateCreation">Date de création</option>
+                <option value="dateEcheance">Date d'échéance</option>
+                <option value="statut">Statut</option>
+            </select>
+            <div id="listeTaches"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 - Projet To-Do List David POTEL Groupe 1</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            const today = moment().format("YYYY-MM-DD");
+            document.getElementById("dateCreation").setAttribute("min", today);
+            document.getElementById("dateEcheance").setAttribute("min", today);
+        });
+    </script>
+    <script>
+        afficherTaches();
+    </script>
+
+</body>
+
+</html>

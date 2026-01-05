@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet Etape 1D</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        h2 {
+            text-decoration: underline;
+        }
+
+        h1,
+        h2 {
+            color: #007bff;
+        }
+
+        hr {
+            border: 1px solid #007bff;
+            width: 80%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Etape 1D</h1>
+    <h2>Les données des différentes tâches de l'étape 1A sont complétées en incluant les critères via l'identifiant</h2>
+    <h3><i>Structure JSON déployée</i></h3>
+    <pre>
+        {
+        "tache": [
+            {
+            "idTache": 1,
+            "titre": "Réviser le cours sur CSS Grid",
+            "description": "Lire le chapitre sur CSS Grid et refaire les exercices pour améliorer la mise en page responsive.",
+            "dateCreation": "07-03-2025",
+            "idPriorite": 3,
+            "idEtiquette": 2,
+            "idStatut": 1
+            },
+            {
+            "idTache": 2,
+            "titre": "Appeler le médecin",
+            "description": "Prendre rendez-vous pour un contrôle de routine.",
+            "dateCreation": "05-03-2025",
+            "idPriorite": 1,
+            "idEtiquette": 1,
+            "idStatut": 4
+            },
+            {
+            "idTache": 3,
+            "titre": "Publier un article sur le site de récits de voyage",
+            "description": "Rédiger et mettre en ligne un nouvel article sur mon expérience en Espagne.",
+            "dateCreation": "07-03-2025",
+            "idPriorite": 2,
+            "idEtiquette": 2,
+            "idStatut": 2
+            },
+            {
+            "idTache": 4,
+            "titre": "Mettre à jour le portfolio",
+            "description": "Ajouter les nouveaux projets réalisés et mettre à jour le design.",
+            "dateCreation": "08-03-2025",
+            "idPriorite": 3,
+            "idEtiquette": 2,
+            "idStatut": 3
+            },
+            {
+            "idTache": 5,
+            "titre": "Réserver un hôtel pour les vacances",
+            "description": "Comparer les offres et réserver un hôtel pour les vacances d'été.",
+            "dateCreation": "07-03-2025",
+            "idPriorite": 4,
+            "idEtiquette": 1,
+            "idStatut": 1
+            }
+            ],
+        "priorite": [
+            {
+            "idPriorite": 1,
+            "label": "Très urgent",
+            "description": "Tâche critique nécessitant une action immédiate.",
+            "couleur": "#ff0000"
+            },
+            {
+            "idPriorite": 2,
+            "label": "Urgent",
+            "description": "Tâche importante à réaliser rapidement.",
+            "couleur": "#ff8000"
+            },
+            {
+            "idPriorite": 3,
+            "label": "Moyenne",
+            "description": "Tâche à faire, mais sans contrainte immédiate.",
+            "couleur": "#ffff00"
+            },
+            {
+            "idPriorite": 4,
+            "label": "Basse",
+            "description": "Tâche à effectuer quand on a le temps.",
+            "couleur": "#80ff00"
+            },
+            {
+            "idPriorite": 5,
+            "label": "Optionnelle",
+            "description": "Tâche non prioritaire, qui peut être reportée indéfiniment.",
+            "couleur": "#0080ff"
+            }
+            ],
+        "etiquette": [
+            {
+            "idEtiquette": 1,
+            "label": "Perso",
+            "description": "Tâches personnelles, liées à la vie quotidienne ou aux loisirs."
+            },
+            {
+            "idEtiquette": 2,
+            "label": "Pro",
+            "description": "Tâches professionnelles, liées au travail ou aux projets."
+            }
+            ],
+        "statut": [
+            {
+            "idStatut": 1,
+            "label": "A faire",
+            "description": "Tâche à réaliser, pas encore commencée."
+            },
+            {
+            "idStatut": 2,
+            "label": "En cours",
+            "description": "Tâche actuellement en cours de réalisation."
+            },
+            {
+            "idStatut": 3,
+            "label": "Terminée",
+            "description": "Tâche achevée avec succès."
+            },
+            {
+            "idStatut": 4,
+            "label": "Supprimée",
+            "description": "Tâche annulée ou non nécessaire."
+            }
+            ]
+        }
+    </pre>
+    <hr>
+    <h3><i>Structure JSON compactée</i></h3>
+    <pre>
+        {"tache":[{"idTache":1,"titre":"Réviser le cours sur CSS Grid","description":"Lire le chapitre sur CSS Grid et
+    refaire les exercices pour améliorer la mise en page
+    responsive.","dateCreation":"07-03-2025","idPriorite":3,"idEtiquette":2,"idStatut":1},{"idTache":2,"titre":"Appeler
+    le médecin","description":"Prendre rendez-vous pour un contrôle de
+    routine.","dateCreation":"05-03-2025","idPriorite":1,"idEtiquette":1,"idStatut":4},{"idTache":3,"titre":"Publier un
+    article sur le site de récits de voyage","description":"Rédiger et mettre en ligne un nouvel article sur mon
+    expérience en
+    Espagne.","dateCreation":"07-03-2025","idPriorite":2,"idEtiquette":2,"idStatut":2},{"idTache":4,"titre":"Mettre à
+    jour le portfolio","description":"Ajouter les nouveaux projets réalisés et mettre à jour le
+    design.","dateCreation":"08-03-2025","idPriorite":3,"idEtiquette":2,"idStatut":3},{"idTache":5,"titre":"Réserver un
+    hôtel pour les vacances","description":"Comparer les offres et réserver un hôtel pour les vacances
+    d'été.","dateCreation":"07-03-2025","idPriorite":4,"idEtiquette":1,"idStatut":1}],"priorite":[{"idPriorite":1,"label":"Très
+    urgent","description":"Tâche critique nécessitant une action
+    immédiate.","couleur":"#ff0000"},{"idPriorite":2,"label":"Urgent","description":"Tâche importante à réaliser
+    rapidement.","couleur":"#ff8000"},{"idPriorite":3,"label":"Moyenne","description":"Tâche à faire, mais sans
+    contrainte immédiate.","couleur":"#ffff00"},{"idPriorite":4,"label":"Basse","description":"Tâche à effectuer quand
+    on a le temps.","couleur":"#80ff00"},{"idPriorite":5,"label":"Optionnelle","description":"Tâche non prioritaire, qui
+    peut être reportée
+    indéfiniment.","couleur":"#0080ff"}],"etiquette":[{"idEtiquette":1,"label":"Perso","description":"Tâches
+    personnelles, liées à la vie quotidienne ou aux loisirs."},{"idEtiquette":2,"label":"Pro","description":"Tâches
+    professionnelles, liées au travail ou aux projets."}],"statut":[{"idStatut":1,"label":"A faire","description":"Tâche
+    à réaliser, pas encore commencée."},{"idStatut":2,"label":"En cours","description":"Tâche actuellement en cours de
+    réalisation."},{"idStatut":3,"label":"Terminée","description":"Tâche achevée avec
+    succès."},{"idStatut":4,"label":"Supprimée","description":"Tâche annulée ou non nécessaire."}]}
+    </pre>
+
+
+
+
+</body>
+
+</html>
